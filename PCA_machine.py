@@ -12,6 +12,19 @@ class PCA_machine:
 
     def scaled_eigenvectors(self, mat):
         cov_mat = mat.cov()
-        print(cov_mat*1000)
         eig_val, eig_vec = np.linalg.eig(cov_mat)
         return np.sqrt(np.absolute(eig_val)) * eig_vec
+    
+    def moorePenrose(self, mat):
+        trans = np.transpose(mat)
+        return np.matmul(trans, np.linalg.inv(np.matmul(mat, trans)))
+    
+    def r2PCA(self, MP1, MP2, ret1, ret2):
+        # MP means the moore penroses
+        # Ret means return histories
+        rel_rethist1 = np.matmul(ret1, MP1)
+        ret_rethist2 = np.matmul(ret2, MP2)
+
+        ret_rethist = np.concatenate((rel_rethist1, ret_rethist2), axis=1)
+
+        return ret_rethist.cov()

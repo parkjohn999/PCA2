@@ -2,6 +2,7 @@ import glob
 import pandas as pd
 import numpy as np
 import datetime
+import platform
 
 class Data:
     START_DATE = datetime.date(2011,9,26)
@@ -11,7 +12,11 @@ class Data:
         glued = pd.DataFrame()
         for file_name in glob.glob('./Data/*.csv'):
             df = pd.read_csv(file_name, index_col="Date", usecols=[0,1])
-            col_name = file_name.split('/')[2].split('.')[0]
+            col_name = ''
+            if 'Windows' in platform.platform():
+                col_name = file_name.split('/')[1].split('\\')[1].split('.')[0]
+            else:
+                col_name = file_name.split('/')[2].split('.')[0]
             df = df.rename(columns={"Last Price":col_name})
             glued = pd.concat([glued, df], axis=1)
         self.df = glued[::-1]
