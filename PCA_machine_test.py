@@ -27,4 +27,15 @@ selected_Qsceigs = np.transpose(Qsceigs[:, :2])
 MPCO = PCAm.moorePenrose(selected_Csceigs)
 MPQS = PCAm.moorePenrose(selected_Qsceigs)
 
-print(MPCO)
+cov = PCAm.r2PCA_cov(MPCO, MPQS, df_CO, df_QS)
+
+#sceigs = PCAm.r2PCA_sceigs(cov)
+
+test_mat = np.array([[1, 0, 0.745, -0.075],
+                    [0,1,0.031,0.285],
+                    [0.745, 0.031, 1, 0],
+                    [-0.075, 0.285, 0, 1]])
+
+print(PCAm.r2PCA_sceigs(test_mat))
+
+#print(1000*PCAm.components(selected_Csceigs, selected_Qsceigs, sceigs))
