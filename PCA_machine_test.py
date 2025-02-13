@@ -26,3 +26,5 @@ selected_Qsceigs = np.transpose(Qsceigs[:, :2])
 
 MPCO = PCAm.moorePenrose(selected_Csceigs)
 MPQS = PCAm.moorePenrose(selected_Qsceigs)
+
+print(MPCO)

@@ -17,7 +17,7 @@ class PCA_machine:
     
     def moorePenrose(self, mat):
         trans = np.transpose(mat)
-        return np.matmul(trans, np.linalg.inv(np.matmul(mat, trans)))
+        return -1*np.matmul(trans, np.linalg.inv(np.matmul(mat, trans)))
     
     def r2PCA(self, MP1, MP2, ret1, ret2):
         # MP means the moore penroses
